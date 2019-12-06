@@ -1,5 +1,11 @@
 *   The `Content-Type` header is set on image variants when they're uploaded to third-party storage services.
 
+*   Variants are tracked in the database to avoid existence checks in the storage service.
+
+    *George Claghorn*
+
+*   Deprecate `service_url` methods in favour of `url`.
+
     *Kyle Ribordy*
 
 *   Allow storage services to be configured per attachment

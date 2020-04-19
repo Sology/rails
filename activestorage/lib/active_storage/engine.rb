@@ -38,6 +38,13 @@ module ActiveStorage
       image/vnd.microsoft.icon
     )
 
+    config.active_storage.web_image_content_types = %w(
+      image/png
+      image/jpeg
+      image/jpg
+      image/gif
+    )
+
     config.active_storage.content_types_to_serve_as_binary = %w(
       text/html
       text/javascript
@@ -75,6 +82,7 @@ module ActiveStorage
         ActiveStorage.routes_prefix     = app.config.active_storage.routes_prefix || "/rails/active_storage"
 
         ActiveStorage.variable_content_types = app.config.active_storage.variable_content_types || []
+        ActiveStorage.web_image_content_types = app.config.active_storage.web_image_content_types || []
         ActiveStorage.content_types_to_serve_as_binary = app.config.active_storage.content_types_to_serve_as_binary || []
         ActiveStorage.service_urls_expire_in = app.config.active_storage.service_urls_expire_in || 5.minutes
         ActiveStorage.content_types_allowed_inline = app.config.active_storage.content_types_allowed_inline || []

@@ -34,13 +34,13 @@ class ActiveStorage::VariantWithRecord
   private
     def transform_blob
       blob.open do |input|
-        if blob.content_type.in?(ActiveStorage.web_image_content_types)
-          variation.transform(input) do |output|
-            yield io: output, filename: blob.filename, content_type: blob.content_type
+        if !blob.image? || blob.content_type.in?(ActiveStorage.web_image_content_types)
+          variation.transform(blob, input) do |output|
+            yield io: output, filename: blob.filename, content_type: blob.content_type, service_name: blob.service.name
           end
         else
-          variation.transform(input, format: "png") do |output|
-            yield io: output, filename: "#{blob.filename.base}.png", content_type: "image/png"
+          variation.transform(blob, input, format: "png") do |output|
+            yield io: output, filename: "#{blob.filename.base}.png", content_type: "image/png", service_name: blob.service.name
           end
         end
       end
